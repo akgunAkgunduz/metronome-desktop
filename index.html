@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Simple Metronome</title>
+</head>
+<body>
+  <div id="appContainer">
+
+    <!-- <div id="animation">
+      <div id="animationDisc"></div>
+      <div id="animationLine"></div>
+    </div>     -->
+    
+    <input type="number" name="bpm" id="bpm" value="60" min="20" max="300">
+
+    <div id="bpmControls" class="row">
+      <button id="minusFive">-5</button>
+      <button id="minusOne">-</button>
+      <div id="bpmDiv">60</div>
+      <button id="plusOne">+</button>
+      <button id="plusFive">+5</button>
+    </div>
+
+    <div id="tempoName" class="row">Adagio</div>
+    
+    <div class="row">
+      <input type="range" name="bpmRange" id="bpmRange" value="60" min="20" max="300">
+    </div>
+
+    <div class="row">
+      <button id="startStop"><i id="startStopIcon" class="fas fa-play"></i></button>
+    </div>
+
+    <div id="volume" class="row">
+      <div id="volumeFontDiv"><i id="volumeIcon" class="fas fa-volume-up"></i></div>
+      <div id="volumeRangeDiv"><input type="range" id="volumeRange" value="100" min="0" max="100"></div>
+    </div>
+
+    <div class="row">
+      <button id="tapTempo">Tap Tempo</button>
+    </div>
+
+  </div>
+
+  <script src="js/tempoMarkings.js"></script>
+  <script src="js/app.js"></script>
+  
+</body>
+</html>
