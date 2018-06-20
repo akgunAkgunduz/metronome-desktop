@@ -72,6 +72,10 @@ input[type=range]::-webkit-slider-thumb {
   margin-bottom: 10px;
 }
 
+#bpm {
+  display: none;
+}
+
 #bpmControls {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
@@ -140,57 +144,4 @@ input[type=range]::-webkit-slider-thumb {
   display: block;
   width: 100%;
   height: 40px;
-}
-
-/* ******************************************************** */
-
-#animation {
-  position: relative;
-  width: 200px;
-  height: 30px;
-  margin: auto;
-  /* border: 1px solid #aaa;
-  background-color: #eee; */
-}
-
-#animationDisc {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: #000;
-  /* border: 2px solid #000; */
-  box-sizing: border-box;
-}
-
-#animationLine {
-  height: 50%;
-  border-bottom: 1px solid #000;
-}
-
-@keyframes disc {
-  0% {
-    left: 0;
-    /* transform: translate(0px, 0px); */
-  }
-  50% {
-    left: 170px;
-    /* transform: translate(170px, 0px); */
-  }
-  100% {
-    left: 0;
-    /* transform: translate(0px, 0px); */
-  }
-}
-
-.animating {
-  /* animation: disc 2s linear infinite forwards; */
-  animation-name: disc;
-  animation-duration: 2s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-#bpm {
-  display: none;
 }

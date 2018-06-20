@@ -76,13 +76,10 @@ const handlers = {
       metronome.stop()
       view.startStopButtonIcon.classList.remove('fa-stop')
       view.startStopButtonIcon.classList.add('fa-play')
-      // animationDisc.classList.remove('animating')
     } else {
       metronome.start()
       view.startStopButtonIcon.classList.remove('fa-play')
       view.startStopButtonIcon.classList.add('fa-stop')
-      // animationDisc.classList.add('animating')
-      // animationDisc.style.animationDuration = 60 / metronome.bpm * 2 + 's'
     }
   },
   
