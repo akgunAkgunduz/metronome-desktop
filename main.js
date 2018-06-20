@@ -16,6 +16,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 456, 
     height: 342,
+    icon: './images/metronome.ico',
     resizable: false
   })
 
