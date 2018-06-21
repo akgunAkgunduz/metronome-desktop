@@ -14,8 +14,8 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 456, 
-    height: 342,
+    width: 400, 
+    height: 290,
     icon: './images/metronome.ico',
     resizable: false
   })
