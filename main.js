@@ -16,8 +16,10 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 400, 
     height: 290,
+    backgroundColor: '#011A27',
     icon: './images/metronome.ico',
-    resizable: false
+    resizable: false,
+    show: false
   })
 
   mainWindow.setMenu(null);
@@ -30,7 +32,13 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  // mainWindow.webContents.openDevTools({mode: 'detach'})
+
+  // Show when the app is ready
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+    // mainWindow.focus()
+  })
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
