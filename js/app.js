@@ -1,6 +1,6 @@
 const metronome = {
   bpm: 60,
-  clickAudio: new Audio('sounds/beat.mp3'),
+  clickAudio: new Audio('sounds/clave.wav'),
   timer: null,
   isPlaying: false,
   // tapTempo: {
