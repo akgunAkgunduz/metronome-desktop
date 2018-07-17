@@ -32,7 +32,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  // mainWindow.webContents.openDevTools({mode: 'detach'})
 
   // Show when the app is ready
   mainWindow.once('ready-to-show', () => {
