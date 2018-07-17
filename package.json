@@ -1,7 +1,8 @@
 {
   "name": "metronome-desktop",
+  "productName": "Desktop Metronome",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple desktop metronome",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -9,11 +10,13 @@
   },
   "repository": "",
   "keywords": [
-    "Electron",
-    "metronome"
+    "Electron framework",
+    "metronome",
+    "music",
+    "practice"
   ],
-  "author": "",
-  "license": "",
+  "author": "Akgün Akgündüz",
+  "license": "MIT",
   "devDependencies": {
     "electron": "*"
   }
