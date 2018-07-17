@@ -4,24 +4,24 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/icons.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Simple Metronome</title>
+  <title>Metronome</title>
 </head>
 <body>
   <div id="appContainer">    
     <input type="number" name="bpm" id="bpm" value="60" min="20" max="300">
 
     <div id="bpmControls" class="row">
-      <button id="minusFive">-5</button>
-      <button id="minusOne"><i class="fas fa-minus"></i></button>
+      <button id="minusFive" tabindex="-1" onkeydown="return false;">-5</button>
+      <button id="minusOne" tabindex="-1" onkeydown="return false;"><i class="fas fa-minus"></i></button>
       <div id="bpmDiv">60</div>
-      <button id="plusOne"><i class="fas fa-plus"></i></button>
-      <button id="plusFive">+5</button>
+      <button id="plusOne" tabindex="-1" onkeydown="return false;"><i class="fas fa-plus"></i></button>
+      <button id="plusFive" tabindex="-1" onkeydown="return false;">+5</button>
     </div>
 
     <div id="tempoName" class="row">Adagio</div>
     
     <div class="row">
-      <input type="range" name="bpmRange" id="bpmRange" value="60" min="20" max="300">
+      <input type="range" name="bpmRange" id="bpmRange" value="60" min="20" max="300" tabindex="-1" onkeydown="return false;">
     </div>
 
     <div class="row">
@@ -30,7 +30,7 @@
 
     <div id="volume" class="row">
       <div id="volumeFontDiv"><i id="volumeIcon" class="fas fa-volume-up"></i></div>
-      <div id="volumeRangeDiv"><input type="range" id="volumeRange" value="100" min="0" max="100"></div>
+      <div id="volumeRangeDiv"><input type="range" id="volumeRange" value="100" min="0" max="100" tabindex="-1" onkeydown="return false;"></div>
     </div>
 
     <!-- <div class="row">

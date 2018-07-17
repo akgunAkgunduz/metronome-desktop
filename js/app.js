@@ -171,4 +171,27 @@ const handlers = {
   // }
 }
 
+// Keyboard shortcuts
+window.addEventListener('keydown', (e) => {
+  if (e.keyCode == '37') {
+    handlers.decreaseTempo()
+  }
+
+  if (e.keyCode == '39') {
+    handlers.increaseTempo()
+  }
+
+  if (e.keyCode == '40') {
+    handlers.decreaseTempoFive()
+  }
+
+  if (e.keyCode == '38') {
+    handlers.increaseTempoFive()
+  }
+
+  if (e.keyCode == '32') {
+    handlers.toggleStart()
+  }
+})
+
 view.setUpEventListeners()
