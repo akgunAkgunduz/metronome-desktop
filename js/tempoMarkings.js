@@ -1,10 +1,7 @@
 const tempoMarkings = {
   name: function(tempo) {
-    // console.log(this)
     for (name in this.names) {
-      // console.log(name)
       if (tempo >= this.names[name].min && tempo <= this.names[name].max) {
-        // console.log('found:', name)
         return name
       }
     }
