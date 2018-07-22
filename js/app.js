@@ -3,6 +3,18 @@ const metronome = {
   clickAudio: new Audio('sounds/clave.wav'),
   timer: null,
   isPlaying: false,
+  initialize: function() {
+    if (localStorage.tempo) {
+      this.bpm = localStorage.tempo
+      view.bpmDiv.textContent = this.bpm
+      view.bpmRange.value = this.bpm
+      view.tempoName.textContent = tempoMarkings.name(this.bpm)
+    } else {
+      view.bpmDiv.textContent = this.bpm
+      view.bpmRange.value = this.bpm
+      view.tempoName.textContent = tempoMarkings.name(this.bpm)
+    }
+  },
   click: function() {
     this.clickAudio.play()
   },
@@ -73,6 +85,8 @@ const handlers = {
   
   changeTempo: function() {
     metronome.bpm = parseInt(this.value)
+    localStorage.tempo = metronome.bpm
+
     bpmDiv.innerText = metronome.bpm
     tempoName.innerText = tempoMarkings.name(metronome.bpm)
     metronome.update()     
@@ -80,6 +94,8 @@ const handlers = {
 
   increaseTempo: function() {
     if (metronome.bpm < 300) metronome.bpm++
+    localStorage.tempo = metronome.bpm
+
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
     metronome.update()
@@ -87,6 +103,8 @@ const handlers = {
 
   decreaseTempo: function() {
     if (metronome.bpm > 20) metronome.bpm--
+    localStorage.tempo = metronome.bpm
+
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
     metronome.update()
@@ -97,7 +115,9 @@ const handlers = {
       metronome.bpm += 5
     } else if (metronome.bpm > 295) {
       metronome.bpm = 300
-    }      
+    }
+    localStorage.tempo = metronome.bpm
+
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
     metronome.update()
@@ -108,7 +128,9 @@ const handlers = {
       metronome.bpm -= 5
     } else if (metronome.bpm < 25) {
       metronome.bpm = 20
-    } 
+    }
+    localStorage.tempo = metronome.bpm
+
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
     metronome.update()
@@ -157,4 +179,5 @@ window.addEventListener('keydown', (e) => {
   }
 })
 
+metronome.initialize()
 view.setUpEventListeners()
