@@ -1,8 +1,8 @@
 const metronome = {
-  bpm: 60,
-  clickAudio: new Audio('sounds/clave.wav'),
-  timer: null,
   isPlaying: false,
+  clickAudio: new Audio('sounds/clave.wav'),
+  bpm: 60,
+  timer: null,
   initialize: function() {
     if (localStorage.tempo) {
       this.bpm = localStorage.tempo
@@ -15,29 +15,14 @@ const metronome = {
       view.tempoName.textContent = tempoMarkings.name(this.bpm)
     }
   },
-  click: function() {
-    this.clickAudio.play()
-  },
-  repeatClick: function() {
-    this.isPlaying = true
-    let t1, t2 = 0    
-    this.timer = setInterval(() => {
-      this.click()
-      if (t1) t2 = t1
-      t1 = performance.now()    
-      if (t2) console.log(t1 - t2)
-    }, 60000 / this.bpm)
-  },
   start: function() {
+    let t1 = performance.now()
+    this.clickAudio.play()
     this.isPlaying = true
-    this.click()
-    this.repeatClick()    
-  },
-  update: function() {
-    if (this.isPlaying) {
-      this.stop()
-      this.repeatClick()
-    }
+    this.timer = setTimeout(() => {
+      console.log(performance.now() - t1)
+      this.start()
+    }, 60000 / this.bpm)
   },
   stop: function() {
     clearInterval(this.timer)
@@ -88,8 +73,7 @@ const handlers = {
     localStorage.tempo = metronome.bpm
 
     bpmDiv.innerText = metronome.bpm
-    tempoName.innerText = tempoMarkings.name(metronome.bpm)
-    metronome.update()     
+    tempoName.innerText = tempoMarkings.name(metronome.bpm)   
   },
 
   increaseTempo: function() {
@@ -98,7 +82,6 @@ const handlers = {
 
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
-    metronome.update()
   },
 
   decreaseTempo: function() {
@@ -107,7 +90,6 @@ const handlers = {
 
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
-    metronome.update()
   },
 
   increaseTempoFive: function() {
@@ -120,7 +102,6 @@ const handlers = {
 
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
-    metronome.update()
   },
 
   decreaseTempoFive: function() {
@@ -133,7 +114,6 @@ const handlers = {
 
     view.bpmDiv.innerText = metronome.bpm
     view.bpmRange.value = metronome.bpm
-    metronome.update()
   },
 
   changeVolume: function() {
