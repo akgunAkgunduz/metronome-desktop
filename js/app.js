@@ -18,11 +18,13 @@ const metronome = {
   start: function() {
     let t1 = performance.now()
     this.clickAudio.play()
+    let interval = 60000 / this.bpm
+    console.log('interval:', interval)
     this.isPlaying = true
     this.timer = setTimeout(() => {
       console.log(performance.now() - t1)
       this.start()
-    }, 60000 / this.bpm)
+    }, interval)
   },
   stop: function() {
     clearInterval(this.timer)
