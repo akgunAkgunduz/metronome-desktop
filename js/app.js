@@ -1,6 +1,6 @@
 const metronome = {
   isPlaying: false,
-  clickAudio: new Audio('sounds/clave.wav'),
+  clickAudio: clickSound,
   bpm: 60,
   timer: null,
   initialize: function() {
