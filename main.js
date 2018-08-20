@@ -16,6 +16,7 @@ function createWindow () {
     height: 290,
     x: mainWindowState.x,
     y: mainWindowState.y,
+    frame: false,
     backgroundColor: '#011A27',
     icon: './images/metronome.ico',
     resizable: false,
