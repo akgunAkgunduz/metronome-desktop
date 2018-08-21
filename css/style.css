@@ -160,6 +160,7 @@ input[type=range]::-webkit-slider-thumb {
 
 #appName {
   float: left;
+  transition: .3s;
 }
 
 #windowControls {
@@ -175,4 +176,5 @@ input[type=range]::-webkit-slider-thumb {
   background-color: var(--color-primary);
   text-align: center;
   cursor: pointer;
+  transition: .3s;
 }
