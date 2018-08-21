@@ -8,13 +8,19 @@
 </head>
 <body>
   <audio id="clickSound" src="sounds/beat.wav"></audio>
+
   <div id="appBar">
     <div id="appName">Metronome</div>
     <div id="windowControls">
-      <div id="minimize">-</div>
-      <div id="close">x</div>
+      <div id="minimize">
+        <i class="fas fa-minus"></i>
+      </div>
+      <div id="close">
+        <i class="fas fa-times"></i>
+      </div>
     </div>
   </div>
+
   <div id="appContainer">    
     <input type="number" name="bpm" id="bpm" value="60" min="20" max="300">
 
