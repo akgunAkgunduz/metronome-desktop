@@ -45,13 +45,18 @@
       <button id="startStop" tabindex="-1" onkeydown="return false;"><i id="startStopIcon" class="fas fa-play"></i></button>
     </div>
 
-    <div id="volume" class="row">
-      <div id="volumeFontDiv"><i id="volumeIcon" class="fas fa-volume-up"></i></div>
-      <div id="volumeRangeDiv"><input type="range" id="volumeRange" value="100" min="0" max="100" tabindex="-1" onkeydown="return false;"></div>
+    <div id="volumeAndTapTempo" class="row">
+      <div id="volume">
+        <div id="volumeFontDiv"><i id="volumeIcon" class="fas fa-volume-up"></i></div>
+        <div id="volumeRangeDiv"><input type="range" id="volumeRange" value="100" min="0" max="100" tabindex="-1" onkeydown="return false;"></div>
+      </div>
+      <div id="tapTempoDiv">
+        <button id="tapTempo">Tap Tempo</button>
+      </div>
     </div>
 
     <!-- <div class="row">
-      <button id="tapTempo">Tap Tempo</button>
+      
     </div> -->
 
   </div>
