@@ -5,7 +5,7 @@ const metronome = {
   timer: null,
   initialize: function() {
     if (localStorage.tempo) {
-      this.bpm = localStorage.tempo
+      this.bpm = parseInt(localStorage.tempo)
       view.bpmDiv.textContent = this.bpm
       view.bpmRange.value = this.bpm
       view.tempoName.textContent = tempoMarkings.name(this.bpm)
