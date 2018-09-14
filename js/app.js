@@ -54,6 +54,22 @@ const view = {
     this.plusOne.addEventListener('click', handlers.increaseTempo)
     this.plusFive.addEventListener('click', handlers.increaseTempoFive)
     this.volumeRange.addEventListener('input', handlers.changeVolume.bind(this.volumeRange))
+  },
+
+  updateVolumeIcon: function() {
+    if (this.volumeRange.value > 50) {
+      view.volumeIcon.classList.remove('fa-volume-down')
+      view.volumeIcon.classList.remove('fa-volume-off')
+      view.volumeIcon.classList.add('fa-volume-up')        
+    } else if (this.volumeRange.value < 51 && this.volumeRange.value > 0) {
+      view.volumeIcon.classList.remove('fa-volume-up')
+      view.volumeIcon.classList.remove('fa-volume-off')
+      view.volumeIcon.classList.add('fa-volume-down')        
+    } else if (this.volumeRange.value == 0) {
+      view.volumeIcon.classList.remove('fa-volume-up')
+      view.volumeIcon.classList.remove('fa-volume-down')
+      view.volumeIcon.classList.add('fa-volume-off')        
+    }
   }
 }
 
@@ -120,21 +136,7 @@ const handlers = {
 
   changeVolume: function() {
     metronome.clickAudio.volume = this.value / 100
-    if (this.value > 50) {
-      view.volumeIcon.classList.remove('fa-volume-down')
-      view.volumeIcon.classList.remove('fa-volume-off')
-      view.volumeIcon.classList.add('fa-volume-up')        
-    }
-    if (this.value < 51 && this.value > 0) {
-      view.volumeIcon.classList.remove('fa-volume-up')
-      view.volumeIcon.classList.remove('fa-volume-off')
-      view.volumeIcon.classList.add('fa-volume-down')        
-    }
-    if (this.value == 0) {
-      view.volumeIcon.classList.remove('fa-volume-up')
-      view.volumeIcon.classList.remove('fa-volume-down')
-      view.volumeIcon.classList.add('fa-volume-off')        
-    }
+    view.updateVolumeIcon()    
   },
 }
 
