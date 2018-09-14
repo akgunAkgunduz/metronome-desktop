@@ -14,6 +14,12 @@ const metronome = {
       view.bpmRange.value = this.bpm
       view.tempoName.textContent = tempoMarkings.name(this.bpm)
     }
+
+    if (localStorage.volume) {
+      this.clickAudio.volume = parseFloat(localStorage.volume)
+      view.volumeRange.value = this.clickAudio.volume * 100
+      view.updateVolumeIcon()
+    }
   },
   start: function() {
     let t1 = performance.now()
@@ -136,6 +142,7 @@ const handlers = {
 
   changeVolume: function() {
     metronome.clickAudio.volume = this.value / 100
+    localStorage.volume = metronome.clickAudio.volume
     view.updateVolumeIcon()    
   },
 }
