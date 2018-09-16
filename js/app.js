@@ -39,6 +39,11 @@ const metronome = {
   }  
 }
 
+const trainer = {
+  period: 4,
+  increment: 0
+}
+
 const view = {
   startStopButton: document.getElementById('startStop'),
   startStopButtonIcon: document.getElementById('startStopIcon'),

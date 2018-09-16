@@ -23,6 +23,7 @@ body {
   padding: 0;
   color: var(--color-quaternary);
   background-color: var(--color-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 button {
@@ -204,4 +205,19 @@ input[type=range]::-webkit-slider-thumb {
   line-height: 30px;
   height: 20px;
   width: 20px;
+}
+
+#trainer span {
+  display: inline-block;
+  width: 80px;
+}
+
+#trainer input {
+  width: 40px;
+  height: 24px;
+  border: none;
+  text-align: center;
+  color: var(--color-quaternary);
+  background-color: var(--color-primary);
+  margin-right: 1rem;
 }

@@ -45,7 +45,7 @@
       <button id="startStop" tabindex="-1" onkeydown="return false;"><i id="startStopIcon" class="fas fa-play"></i></button>
     </div>
 
-    <div id="volumeAndTapTempo" class="row last-row">
+    <div id="volumeAndTapTempo" class="row">
       <div id="volume">
         <div id="volumeFontDiv"><i id="volumeIcon" class="fas fa-volume-up"></i></div>
         <div id="volumeRangeDiv"><input type="range" id="volumeRange" value="100" min="0" max="100" tabindex="-1" onkeydown="return false;"></div>
@@ -53,6 +53,11 @@
       <div id="tapTempoDiv">
         <button id="tapTempo">Tap Tempo</button>
       </div>
+    </div>
+
+    <div id="trainer" class="last-row">
+      <span>Period</span> <input type="number" name="period" id="period" value="4" min="0">
+      <span>Increment</span> <input type="number" name="increment" id="increment" value="0" min="0">
     </div>
 
   </div>
