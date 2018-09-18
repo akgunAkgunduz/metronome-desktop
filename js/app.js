@@ -56,6 +56,10 @@ const view = {
   volumeRange: document.getElementById('volumeRange'),
   volumeIcon: document.getElementById('volumeIcon'),  
   tempoName: document.getElementById('tempoName'),
+  period: document.getElementById('period'),
+  periodValue: document.getElementById('periodValue'),
+  increment: document.getElementById('increment'),
+  incrementValue: document.getElementById('incrementValue'),
 
   setUpEventListeners: function() {    
     this.startStopButton.addEventListener('click', handlers.toggleStart)
@@ -65,6 +69,8 @@ const view = {
     this.plusOne.addEventListener('click', handlers.increaseTempo)
     this.plusFive.addEventListener('click', handlers.increaseTempoFive)
     this.volumeRange.addEventListener('input', handlers.changeVolume.bind(this.volumeRange))
+    this.period.addEventListener('input', handlers.changePeriod.bind(this.period))
+    this.increment.addEventListener('input', handlers.changeIncrement.bind(this.increment))
   },
 
   updateVolumeIcon: function() {
@@ -150,6 +156,16 @@ const handlers = {
     localStorage.volume = metronome.clickAudio.volume
     view.updateVolumeIcon()    
   },
+
+  changePeriod: function() {
+    trainer.period = parseInt(this.value)
+    periodValue.textContent = trainer.period
+  },
+
+  changeIncrement: function() {
+    trainer.increment = parseInt(this.value)
+    incrementValue.textContent = trainer.increment
+  }
 }
 
 // Keyboard shortcuts
