@@ -2,7 +2,54 @@ const metronome = {
   isPlaying: false,
   clickAudio: clickSound,
   bpm: 60,
+  maxBpm: 300,
   timer: null,
+  clickCount: 0,
+  getBpm() {
+    return this.bpm
+  },
+  setBpm(newBpm) {
+    this.bpm = newBpm
+    localStorage.tempo = this.getBpm()
+    console.log(this.bpm)
+  },
+  getClickCount() {
+    return this.clickCount
+  },
+  setClickCount(newClickCount) {
+    this.clickCount = newClickCount
+  },
+  start: function() {
+    let t1 = performance.now()
+    this.clickAudio.play()
+    this.isPlaying = true
+    this.setClickCount(this.getClickCount() + 1)
+
+    if (
+      trainer.increment > 0 
+      && 
+      this.getClickCount() % trainer.period === 0 
+      && 
+      this.getBpm() < this.maxBpm
+    ) {
+      this.setBpm(this.getBpm() + trainer.increment)
+      view.updateBpm()
+    }
+
+    let interval = 60000 / this.getBpm()
+    // console.log('interval:', interval)
+
+    this.timer = setTimeout(() => {
+      console.log(performance.now() - t1)
+      this.start()
+    }, interval)
+  },
+  stop: function() {
+    clearInterval(this.timer)
+    this.timer = null
+    this.isPlaying = false
+    this.setClickCount(0)
+  },
   initialize: function() {
     if (localStorage.tempo) {
       this.bpm = parseInt(localStorage.tempo)
@@ -20,23 +67,7 @@ const metronome = {
       view.volumeRange.value = this.clickAudio.volume * 100
       view.updateVolumeIcon()
     }
-  },
-  start: function() {
-    let t1 = performance.now()
-    this.clickAudio.play()
-    let interval = 60000 / this.bpm
-    console.log('interval:', interval)
-    this.isPlaying = true
-    this.timer = setTimeout(() => {
-      console.log(performance.now() - t1)
-      this.start()
-    }, interval)
-  },
-  stop: function() {
-    clearInterval(this.timer)
-    this.timer = null
-    this.isPlaying = false
-  }  
+  }
 }
 
 const trainer = {
@@ -71,6 +102,11 @@ const view = {
     this.volumeRange.addEventListener('input', handlers.changeVolume.bind(this.volumeRange))
     this.period.addEventListener('input', handlers.changePeriod.bind(this.period))
     this.increment.addEventListener('input', handlers.changeIncrement.bind(this.increment))
+  },
+
+  updateBpm: function() {
+    this.bpmDiv.textContent = metronome.getBpm()
+    this.bpmRange.value = metronome.getBpm()
   },
 
   updateVolumeIcon: function() {
