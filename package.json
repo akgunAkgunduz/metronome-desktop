@@ -2,17 +2,19 @@
   "name": "metronome-desktop",
   "productName": "Desktop Metronome",
   "version": "1.0.0",
-  "description": "A simple desktop metronome",
+  "description": "A desktop metronome",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "package-win": "electron-packager . --asar --icon=images/metronome.ico --prune"
   },
-  "repository": "",
+  "repository": "https://github.com/akgunAkgunduz/metronome-desktop.git",
   "keywords": [
-    "Electron framework",
+    "Electron",
     "metronome",
+    "speed trainer metronome",
     "music",
+    "musician",
     "practice"
   ],
   "author": "Akgün Akgündüz",
