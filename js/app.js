@@ -109,6 +109,16 @@ const view = {
     this.bpmRange.value = metronome.getBpm()
   },
 
+  updateToggleStart: function() {
+    if (metronome.isPlaying) {
+      this.startStopButtonIcon.classList.remove('fa-play')
+      this.startStopButtonIcon.classList.add('fa-stop')
+    } else {
+      this.startStopButtonIcon.classList.remove('fa-stop')
+      this.startStopButtonIcon.classList.add('fa-play')
+    }
+  },
+
   updateVolumeIcon: function() {
     if (this.volumeRange.value > 50) {
       view.volumeIcon.classList.remove('fa-volume-down')
@@ -129,14 +139,11 @@ const view = {
 const handlers = {
   toggleStart: function() {
     if (metronome.isPlaying) {
-      metronome.stop()
-      view.startStopButtonIcon.classList.remove('fa-stop')
-      view.startStopButtonIcon.classList.add('fa-play')
+      metronome.stop()     
     } else {
-      metronome.start()
-      view.startStopButtonIcon.classList.remove('fa-play')
-      view.startStopButtonIcon.classList.add('fa-stop')
+      metronome.start()      
     }
+    view.updateToggleStart()
   },
   
   changeTempo: function() {
