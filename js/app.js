@@ -2,6 +2,7 @@ const metronome = {
   isPlaying: false,
   clickAudio: clickSound,
   bpm: 60,
+  minBpm: 20,
   maxBpm: 300,
   timer: null,
   clickCount: 0,
@@ -32,8 +33,14 @@ const metronome = {
       && 
       this.getBpm() < this.maxBpm
     ) {
-      this.setBpm(this.getBpm() + trainer.increment)
-      view.updateBpm()
+      if (this.getBpm() + trainer.increment > this.maxBpm) {
+        this.setBpm(this.maxBpm)  
+      } else {
+        this.setBpm(this.getBpm() + trainer.increment)
+      }
+      view.updateBpmDiv()
+      view.updateTempoName()
+      view.updateBpmRange()
     }
 
     let interval = 60000 / this.getBpm()
@@ -52,15 +59,11 @@ const metronome = {
   },
   initialize: function() {
     if (localStorage.tempo) {
-      this.bpm = parseInt(localStorage.tempo)
-      view.bpmDiv.textContent = this.bpm
-      view.bpmRange.value = this.bpm
-      view.tempoName.textContent = tempoMarkings.name(this.bpm)
-    } else {
-      view.bpmDiv.textContent = this.bpm
-      view.bpmRange.value = this.bpm
-      view.tempoName.textContent = tempoMarkings.name(this.bpm)
+      this.setBpm(parseInt(localStorage.tempo))
     }
+    view.updateBpmDiv()
+    view.updateTempoName()
+    view.updateBpmRange()
 
     if (localStorage.volume) {
       this.clickAudio.volume = parseFloat(localStorage.volume)
@@ -104,9 +107,16 @@ const view = {
     this.increment.addEventListener('input', handlers.changeIncrement.bind(this.increment))
   },
 
-  updateBpm: function() {
+  updateBpmDiv: function() {
     this.bpmDiv.textContent = metronome.getBpm()
+  },
+
+  updateBpmRange: function() {
     this.bpmRange.value = metronome.getBpm()
+  },
+
+  updateTempoName: function() {
+    this.tempoName.textContent = tempoMarkings.name(metronome.getBpm())
   },
 
   updateToggleStart: function() {
@@ -147,51 +157,49 @@ const handlers = {
   },
   
   changeTempo: function() {
-    metronome.bpm = parseInt(this.value)
-    localStorage.tempo = metronome.bpm
-
-    bpmDiv.innerText = metronome.bpm
-    tempoName.innerText = tempoMarkings.name(metronome.bpm)   
+    metronome.setBpm(parseInt(this.value))
+    view.updateBpmDiv()
+    view.updateTempoName()
   },
 
   increaseTempo: function() {
-    if (metronome.bpm < 300) metronome.bpm++
-    localStorage.tempo = metronome.bpm
-
-    view.bpmDiv.innerText = metronome.bpm
-    view.bpmRange.value = metronome.bpm
+    if (metronome.getBpm() < 300) {
+      metronome.setBpm(metronome.getBpm() + 1)      
+    }
+    view.updateBpmDiv()
+    view.updateTempoName()
+    view.updateBpmRange()
   },
 
   decreaseTempo: function() {
-    if (metronome.bpm > 20) metronome.bpm--
-    localStorage.tempo = metronome.bpm
-
-    view.bpmDiv.innerText = metronome.bpm
-    view.bpmRange.value = metronome.bpm
+    if (metronome.getBpm() > 20) {
+      metronome.setBpm(metronome.getBpm() - 1)
+    }
+    view.updateBpmDiv()
+    view.updateTempoName()
+    view.updateBpmRange()
   },
 
   increaseTempoFive: function() {
-    if (metronome.bpm < 296) {
-      metronome.bpm += 5
-    } else if (metronome.bpm > 295) {
-      metronome.bpm = 300
+    if (metronome.getBpm() < metronome.maxBpm - 4) {
+      metronome.setBpm(metronome.getBpm() + 5)
+    } else if (metronome.getBpm() > 295) {
+      metronome.setBpm(metronome.maxBpm)
     }
-    localStorage.tempo = metronome.bpm
-
-    view.bpmDiv.innerText = metronome.bpm
-    view.bpmRange.value = metronome.bpm
+    view.updateBpmDiv()
+    view.updateTempoName()
+    view.updateBpmRange()
   },
 
   decreaseTempoFive: function() {
-    if (metronome.bpm > 24) {
-      metronome.bpm -= 5
-    } else if (metronome.bpm < 25) {
-      metronome.bpm = 20
+    if (metronome.getBpm() > metronome.minBpm + 4) {
+      metronome.setBpm(metronome.getBpm() - 5)
+    } else if (metronome.getBpm() < metronome.minBpm + 5) {
+      metronome.setBpm(metronome.minBpm)
     }
-    localStorage.tempo = metronome.bpm
-
-    view.bpmDiv.innerText = metronome.bpm
-    view.bpmRange.value = metronome.bpm
+    view.updateBpmDiv()
+    view.updateTempoName()
+    view.updateBpmRange()
   },
 
   changeVolume: function() {
