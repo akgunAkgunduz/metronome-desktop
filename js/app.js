@@ -78,6 +78,36 @@ const trainer = {
   increment: 0
 }
 
+const tapTempo = {
+  taps: [],
+  timer: null,
+  tap: function() {
+    this.taps.push(Date.now())
+    console.log(this.taps)
+    this.clear()
+    if (this.taps.length > 1) {
+      let difference = this.taps[this.taps.length - 1] - this.taps[this.taps.length - 2]
+      if (difference < 200) {
+        metronome.setBpm(300)  
+      } else if (difference > 3000) {
+        metronome.setBpm(20)
+      } else {
+        metronome.setBpm(parseInt(60000 / difference))
+      }
+      view.updateBpmDiv()
+      view.updateTempoName()
+      view.updateBpmRange()
+    }
+  },
+  clear: function() {
+    if ((this.taps[this.taps.length - 1]) - (this.taps[this.taps.length - 2]) > 5000) {
+      newFirstTap = this.taps[this.taps.length - 1]
+      this.taps = []
+      this.taps.push(newFirstTap)
+    }
+  }
+}
+
 const view = {
   startStopButton: document.getElementById('startStop'),
   startStopButtonIcon: document.getElementById('startStopIcon'),
@@ -94,7 +124,7 @@ const view = {
   periodValue: document.getElementById('periodValue'),
   increment: document.getElementById('increment'),
   incrementValue: document.getElementById('incrementValue'),
-  tapTempo: document.getElementById('tapTempo'),
+  tapTempoButton: document.getElementById('tapTempoButton'),
 
   setUpEventListeners: function() {    
     this.startStopButton.addEventListener('click', handlers.toggleStart)
@@ -106,7 +136,7 @@ const view = {
     this.volumeRange.addEventListener('input', handlers.changeVolume.bind(this.volumeRange))
     this.period.addEventListener('input', handlers.changePeriod.bind(this.period))
     this.increment.addEventListener('input', handlers.changeIncrement.bind(this.increment))
-    this.tapTempo.addEventListener('click', this.tap)
+    this.tapTempoButton.addEventListener('click', handlers.tap)
   },
 
   updateBpmDiv: function() {
@@ -147,11 +177,11 @@ const view = {
     }
   },
 
-  tap: function() {
-    view.tapTempo.classList.add('animating')
+  animateTapTempoButton: function() {
+    view.tapTempoButton.classList.add('animating')
     setTimeout(() => {
-      view.tapTempo.classList.remove('animating')
-    } , 150)
+      view.tapTempoButton.classList.remove('animating')
+    }, 150)
   }
 }
 
@@ -225,6 +255,11 @@ const handlers = {
   changeIncrement: function() {
     trainer.increment = parseInt(this.value)
     incrementValue.textContent = trainer.increment
+  },
+
+  tap: function() {
+    view.animateTapTempoButton()
+    tapTempo.tap()    
   }
 }
 
