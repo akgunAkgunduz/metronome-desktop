@@ -94,6 +94,7 @@ const view = {
   periodValue: document.getElementById('periodValue'),
   increment: document.getElementById('increment'),
   incrementValue: document.getElementById('incrementValue'),
+  tapTempo: document.getElementById('tapTempo'),
 
   setUpEventListeners: function() {    
     this.startStopButton.addEventListener('click', handlers.toggleStart)
@@ -105,6 +106,7 @@ const view = {
     this.volumeRange.addEventListener('input', handlers.changeVolume.bind(this.volumeRange))
     this.period.addEventListener('input', handlers.changePeriod.bind(this.period))
     this.increment.addEventListener('input', handlers.changeIncrement.bind(this.increment))
+    this.tapTempo.addEventListener('click', this.tap)
   },
 
   updateBpmDiv: function() {
@@ -143,6 +145,13 @@ const view = {
       view.volumeIcon.classList.remove('fa-volume-down')
       view.volumeIcon.classList.add('fa-volume-off')        
     }
+  },
+
+  tap: function() {
+    view.tapTempo.classList.add('animating')
+    setTimeout(() => {
+      view.tapTempo.classList.remove('animating')
+    } , 150)
   }
 }
 
