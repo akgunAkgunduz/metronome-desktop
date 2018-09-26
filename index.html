@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/icons.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="stylesheets/icons.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
   <title>Metronome</title>
 </head>
 <body>
-  <audio id="clickSound" src="sounds/beat.wav"></audio>
+  <audio id="clickSound" src="audio/beat.wav"></audio>
 
   <div id="appBar">
     <div id="app-logo">
@@ -70,9 +70,9 @@
 
   </div>
   
-  <script src="js/appBar.js"></script>
-  <script src="js/tempoMarkings.js"></script>
-  <script src="js/app.js"></script>
-  
+  <script>
+    require('./javascript/appBar.js')
+    require('./javascript/app.js')
+  </script>  
 </body>
 </html>

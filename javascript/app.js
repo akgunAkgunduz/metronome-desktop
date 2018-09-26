@@ -1,3 +1,5 @@
+const tempoMarkings = require('./tempoMarkings')
+
 const metronome = {
   isPlaying: false,
   clickAudio: clickSound,

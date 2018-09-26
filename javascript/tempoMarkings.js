@@ -104,3 +104,5 @@ const tempoMarkings = {
     }
   }  
 }
+
+module.exports = tempoMarkings
