@@ -111,6 +111,7 @@ const tapTempo = {
 }
 
 const view = {
+  window: window,
   startStopButton: document.getElementById('startStop'),
   startStopButtonIcon: document.getElementById('startStopIcon'),
   bpmRange: document.getElementById('bpmRange'),
@@ -139,6 +140,7 @@ const view = {
     this.period.addEventListener('input', handlers.changePeriod.bind(this.period))
     this.increment.addEventListener('input', handlers.changeIncrement.bind(this.increment))
     this.tapTempoButton.addEventListener('click', handlers.tap)
+    this.window.addEventListener('keydown', handlers.keydown)
   },
 
   updateBpmDiv: function() {
@@ -262,31 +264,30 @@ const handlers = {
   tap: function() {
     view.animateTapTempoButton()
     tapTempo.tap()    
+  },
+
+  keydown: function(e) {
+    if (e.keyCode == '37') {
+      handlers.decreaseTempo()
+    }
+  
+    if (e.keyCode == '39') {
+      handlers.increaseTempo()
+    }
+  
+    if (e.keyCode == '40') {
+      handlers.decreaseTempoFive()
+    }
+  
+    if (e.keyCode == '38') {
+      handlers.increaseTempoFive()
+    }
+  
+    if (e.keyCode == '32') {
+      handlers.toggleStart()
+    }
   }
 }
-
-// Keyboard shortcuts
-window.addEventListener('keydown', (e) => {
-  if (e.keyCode == '37') {
-    handlers.decreaseTempo()
-  }
-
-  if (e.keyCode == '39') {
-    handlers.increaseTempo()
-  }
-
-  if (e.keyCode == '40') {
-    handlers.decreaseTempoFive()
-  }
-
-  if (e.keyCode == '38') {
-    handlers.increaseTempoFive()
-  }
-
-  if (e.keyCode == '32') {
-    handlers.toggleStart()
-  }
-})
 
 metronome.initialize()
 view.setUpEventListeners()
