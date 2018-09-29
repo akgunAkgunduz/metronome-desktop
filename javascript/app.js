@@ -40,9 +40,7 @@ const metronome = {
       } else {
         this.setBpm(this.getBpm() + trainer.increment)
       }
-      view.updateBpmDiv()
-      view.updateTempoName()
-      view.updateBpmRange()
+      view.updateAllBpm()
     }
 
     let interval = 60000 / this.getBpm()
@@ -63,9 +61,7 @@ const metronome = {
     if (localStorage.tempo) {
       this.setBpm(parseInt(localStorage.tempo))
     }
-    view.updateBpmDiv()
-    view.updateTempoName()
-    view.updateBpmRange()
+    view.updateAllBpm()
 
     if (localStorage.volume) {
       this.clickAudio.volume = parseFloat(localStorage.volume)
@@ -96,9 +92,7 @@ const tapTempo = {
       } else {
         metronome.setBpm(parseInt(60000 / difference))
       }
-      view.updateBpmDiv()
-      view.updateTempoName()
-      view.updateBpmRange()
+      view.updateAllBpm()
     }
   },
   clear: function() {
@@ -155,6 +149,12 @@ const view = {
     this.tempoName.textContent = tempoMarkings.name(metronome.getBpm())
   },
 
+  updateAllBpm: function() {
+    this.updateBpmDiv()
+    this.updateTempoName()
+    this.updateBpmRange()
+  },
+
   updateToggleStart: function() {
     if (metronome.isPlaying) {
       this.startStopButtonIcon.classList.remove('fa-play')
@@ -167,24 +167,24 @@ const view = {
 
   updateVolumeIcon: function() {
     if (this.volumeRange.value > 50) {
-      view.volumeIcon.classList.remove('fa-volume-down')
-      view.volumeIcon.classList.remove('fa-volume-off')
-      view.volumeIcon.classList.add('fa-volume-up')        
+      this.volumeIcon.classList.remove('fa-volume-down')
+      this.volumeIcon.classList.remove('fa-volume-off')
+      this.volumeIcon.classList.add('fa-volume-up')        
     } else if (this.volumeRange.value < 51 && this.volumeRange.value > 0) {
-      view.volumeIcon.classList.remove('fa-volume-up')
-      view.volumeIcon.classList.remove('fa-volume-off')
-      view.volumeIcon.classList.add('fa-volume-down')        
+      this.volumeIcon.classList.remove('fa-volume-up')
+      this.volumeIcon.classList.remove('fa-volume-off')
+      this.volumeIcon.classList.add('fa-volume-down')        
     } else if (this.volumeRange.value == 0) {
-      view.volumeIcon.classList.remove('fa-volume-up')
-      view.volumeIcon.classList.remove('fa-volume-down')
-      view.volumeIcon.classList.add('fa-volume-off')        
+      this.volumeIcon.classList.remove('fa-volume-up')
+      this.volumeIcon.classList.remove('fa-volume-down')
+      this.volumeIcon.classList.add('fa-volume-off')        
     }
   },
 
   animateTapTempoButton: function() {
-    view.tapTempoButton.classList.add('animating')
+    this.tapTempoButton.classList.add('animating')
     setTimeout(() => {
-      view.tapTempoButton.classList.remove('animating')
+      this.tapTempoButton.classList.remove('animating')
     }, 150)
   }
 }
@@ -209,18 +209,14 @@ const handlers = {
     if (metronome.getBpm() < 300) {
       metronome.setBpm(metronome.getBpm() + 1)      
     }
-    view.updateBpmDiv()
-    view.updateTempoName()
-    view.updateBpmRange()
+    view.updateAllBpm() 
   },
 
   decreaseTempo: function() {
     if (metronome.getBpm() > 20) {
       metronome.setBpm(metronome.getBpm() - 1)
     }
-    view.updateBpmDiv()
-    view.updateTempoName()
-    view.updateBpmRange()
+    view.updateAllBpm()
   },
 
   increaseTempoFive: function() {
@@ -229,9 +225,7 @@ const handlers = {
     } else if (metronome.getBpm() > 295) {
       metronome.setBpm(metronome.maxBpm)
     }
-    view.updateBpmDiv()
-    view.updateTempoName()
-    view.updateBpmRange()
+    view.updateAllBpm()
   },
 
   decreaseTempoFive: function() {
@@ -240,9 +234,7 @@ const handlers = {
     } else if (metronome.getBpm() < metronome.minBpm + 5) {
       metronome.setBpm(metronome.minBpm)
     }
-    view.updateBpmDiv()
-    view.updateTempoName()
-    view.updateBpmRange()
+    view.updateAllBpm()
   },
 
   changeVolume: function() {
