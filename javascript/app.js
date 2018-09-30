@@ -96,7 +96,7 @@ const tapTempo = {
     }
   },
   clear: function() {
-    if ((this.taps[this.taps.length - 1]) - (this.taps[this.taps.length - 2]) > 5000) {
+    if ((this.taps[this.taps.length - 1]) - (this.taps[this.taps.length - 2]) > 2000) {
       newFirstTap = this.taps[this.taps.length - 1]
       this.taps = []
       this.taps.push(newFirstTap)
