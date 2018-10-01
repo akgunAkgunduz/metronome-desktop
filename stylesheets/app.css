@@ -54,8 +54,8 @@ input[type=range] {
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: var(--color-quaternary);
   cursor: pointer;
@@ -209,8 +209,15 @@ input[type=range]::-webkit-slider-thumb {
 
 #trainer span {
   display: inline-block;
-  width: 80px;
   line-height: 25px;
+}
+
+.labels {
+  width: 80px;
+}
+
+.clicks {
+  width: 40px;
 }
 
 #trainer input {
@@ -219,12 +226,13 @@ input[type=range]::-webkit-slider-thumb {
   display: inline-block;
   line-height: 25px;
   margin: 8px 2px !important;
-  width: 240px;
+  width: 200px;
 }
 
 #periodValue, #incrementValue {
   text-align: right;
-  width: 40px !important;
+  width: 36px !important;
+  margin-right: 5px;
 }
 
 @keyframes tap {
