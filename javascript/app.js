@@ -14,7 +14,7 @@ const metronome = {
   setBpm(newBpm) {
     this.bpm = newBpm
     localStorage.tempo = this.getBpm()
-    console.log(this.bpm)
+    // console.log(this.bpm)
   },
   getClickCount() {
     return this.clickCount
@@ -47,7 +47,7 @@ const metronome = {
     // console.log('interval:', interval)
 
     this.timer = setTimeout(() => {
-      console.log(performance.now() - t1)
+      // console.log(performance.now() - t1)
       this.start()
     }, interval)
   },
@@ -68,6 +68,18 @@ const metronome = {
       view.volumeRange.value = this.clickAudio.volume * 100
       view.updateVolumeIcon()
     }
+
+    if (localStorage.period) {
+      trainer.period = parseInt(localStorage.period)
+      view.period.value = trainer.period
+      view.periodValue.textContent = trainer.period
+    }
+
+    if (localStorage.increment) {
+      trainer.increment = parseInt(localStorage.increment)
+      view.increment.value = trainer.increment
+      view.incrementValue.textContent = trainer.increment
+    }
   }
 }
 
@@ -81,7 +93,7 @@ const tapTempo = {
   timer: null,
   tap: function() {
     this.taps.push(Date.now())
-    console.log(this.taps)
+    // console.log(this.taps)
     this.clear()
     if (this.taps.length > 1) {
       let difference = this.taps[this.taps.length - 1] - this.taps[this.taps.length - 2]
@@ -245,11 +257,13 @@ const handlers = {
 
   changePeriod: function() {
     trainer.period = parseInt(this.value)
+    localStorage.period = trainer.period
     periodValue.textContent = trainer.period
   },
 
   changeIncrement: function() {
     trainer.increment = parseInt(this.value)
+    localStorage.increment = trainer.increment
     incrementValue.textContent = trainer.increment
   },
 
