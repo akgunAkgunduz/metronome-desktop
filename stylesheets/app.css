@@ -216,8 +216,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 80px;
 }
 
-.clicks {
-  width: 40px;
+.units {
+  width: 48px;
 }
 
 #trainer input {
@@ -231,7 +231,7 @@ input[type=range]::-webkit-slider-thumb {
 
 #periodValue, #incrementValue {
   text-align: right;
-  width: 36px !important;
+  width: 28px !important;
   margin-right: 5px;
 }
 
